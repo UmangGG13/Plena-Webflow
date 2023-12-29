@@ -67,15 +67,19 @@ let cryptoDataa;
                 setArrowAndColors(document.getElementById('change1y'), change1y);
                 document.getElementById('price-change-24h3').innerHTML = ` ${change24h2.toFixed(2)}% `;
                 setArrowAndColors(document.getElementById('price-change-24h3'), change24h2);
-                console.log(changev);
-								
-                const capElement = document.getElementById('market-cap');
-
-                if (capElement && marketCap !== undefined) {
-                    capElement.innerHTML = `${currencySymbol}${(marketCap / 1000000).toFixed(2)} million`;
-                } else {
-                    console.error('err');
-                }
+                document.getElementById('7d-heading').innerHTML = `7 Days Exchange Rate ${data.content.symbol.toUpperCase()} to ${selectedCurrency}`;
+                document.getElementById('24h-heading').innerHTML = `24-Hour Exchange Rate ${data.content.symbol.toUpperCase()} to ${selectedCurrency}`;
+                document.getElementById('3m-heading').innerHTML = `3 Month Exchange Rate ${data.content.symbol.toUpperCase()} to ${selectedCurrency}`;
+                document.getElementById('1m-heading').innerHTML = `1 Month Exchange Rate ${data.content.symbol.toUpperCase()} to ${selectedCurrency}`;
+                document.getElementById('7d-content').innerHTML = `Current ${data.content.symbol.toUpperCase()} Price: ${price}
+                7-Day Change: ${change7d}%`;
+                document.getElementById('24h-content').innerHTML = `Current ${data.content.symbol.toUpperCase()} Price: ${price}
+                24-Hour Change: ${change24h}%`;
+                document.getElementById('1m-content').innerHTML = `Current ${data.content.symbol.toUpperCase()} Price: ${price}
+                1-Month Change: ${change1m}%`;
+                document.getElementById('3m-content').innerHTML = `Current ${data.content.symbol.toUpperCase()} Price: ${price}
+                3-Month Change: ${change3m}%`;
+                document.getElementById('market-cap').innerHTML = `${currencySymbol}${(marketCap / 1000000).toFixed(2)} million`
         }
         
         function getCurrencySymbol(currencyCode) {
@@ -98,7 +102,6 @@ let cryptoDataa;
         }
         function setArrowAndColor(element, value) {
     console.log('Setting arrow and color:', element.id, value);
-
     if (value > 0) {
         element.className = 'positive';
     } else {
@@ -117,7 +120,6 @@ function setArrowAndColors(element, value) {
 function changeCurrency() {
             const coinId = document.getElementById('coin-name').innerText.toLowerCase();
             const selectedCurrency = document.getElementById('currency').value;
-
             if (!cryptoDataa) {
                 fetchCryptoData(coinId, selectedCurrency);
             } else {
